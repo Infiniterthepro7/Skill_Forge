@@ -1,0 +1,37 @@
+??from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/check-answer', methods=['POST'])
+def check_answer():
+    data = request.json
+    task = data['task']
+    answer = data['answer'].strip()
+    performance = data['performance']
+
+    if performance < 0:
+        hint = "Let’s break it down: Use print('text') to show text, = to set values, or loops to add/count (e.g., for x in list)."
+    else:
+        hint = "Check your syntax! Use print() for text, = for variables, loops for lists."
+
+    if task == "Print 'Hello, client!' for a website greeting" and answer == "print('Hello, client!')":
+        new_performance = performance + 1
+        return jsonify({"correct": True, "points": 10, "nextDifficulty": 1, "alternate": "Try: print('Hello, client!') with a space after", "performance": new_performance})
+    elif task == "Set a price to 100 for a client’s product listing" and answer == "price = 100":
+        new_performance = performance + 1
+        return jsonify({"correct": True, "points": 10, "nextDifficulty": 2 if performance > 0 else 1, "alternate": "Try: price = 100.0", "performance": new_performance})
+    elif task == "Set a price to 50 and print it for a client’s invoice" and answer == "price = 50\nprint(price)":
+        new_performance = performance + 1
+        return jsonify({"correct": True, "points": 10, "nextDifficulty": 2, "alternate": "Try: price = 50; print(f'Price: {price}')", "performance": new_performance})
+    elif task == "Sum sales for a client’s report: 10, 20, 30" and answer == "sales = [10, 20, 30]\ntotal = 0\nfor sale in sales:\n    total += sale\nprint(total)":
+        new_performance = performance + 1
+        return jsonify({"correct": True, "points": 10, "nextDifficulty": 2, "alternate": "Try: total = sum([10, 20, 30])", "performance": new_performance})
+    elif task == "Count items sold for a shop’s weekly report: 5 shirts, 15 pants, 25 socks" and answer == "items = [5, 15, 25]\ncount = 0\nfor item in items:\n    count += item\nprint(count)":
+        new_performance = performance + 1
+        return jsonify({"correct": True, "points": 10, "nextDifficulty": 2, "alternate": "Try: count = sum([5, 15, 25])", "performance": new_performance})
+    else:
+        new_performance = performance - 1
+        return jsonify({"correct": False, "hint": hint, "performance": new_performance})
+
+if __name__ == "__main__":
+    app.run(port=5001)??
