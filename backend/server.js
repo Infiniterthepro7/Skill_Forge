@@ -19,9 +19,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 
 // Sync Database Models
-sequelize.sync({ alter: true }) // alter: true ensures tables match models
-  .then(() => console.log('Database synced successfully'))
-  .catch(err => console.error('Database sync failed', err));
+sequelize.sync({ force: true }) 
+  .then(() => console.log("✅ Database Synced Successfully!"))
+  .catch((err) => console.error("Database sync failed", err));
+
 
 // Start Server
 const PORT = process.env.PORT || 5000;

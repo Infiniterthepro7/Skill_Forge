@@ -1,12 +1,19 @@
-// backend/models/index.js
-
-const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const Lesson = require('./lesson');
+const User = require('./user')(sequelize);
 
-// Import models
-const User = require('./user.js')(sequelize, DataTypes); // Correct (function-based)
-const Lesson = require('./lesson'); // Direct import
-const Progress = require('./progress'); // Direct import
+// Define associations if needed (optional)
+// Example:
+// User.hasMany(Lesson);
+// Lesson.belongsTo(User);
 
-// Export all
-module.exports = { sequelize, User, Lesson, Progress };
+sequelize
+  .sync()
+  .then(() => {
+    console.log('✅ Database Synced');
+  })
+  .catch((err) => {
+    console.error('❌ Error syncing database:', err);
+  });
+
+module.exports = { sequelize, Lesson, User };

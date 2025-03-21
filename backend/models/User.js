@@ -1,15 +1,22 @@
-// models/User.js
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { Model, DataTypes } = require('sequelize');
 
-const User = sequelize.define('User', {
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: DataTypes.STRING, allowNull: false },
-  email: { type: DataTypes.STRING, allowNull: false, unique: true },
-  password_hash: { type: DataTypes.STRING, allowNull: false },
-  points: { type: DataTypes.INTEGER, defaultValue: 0 },
-  badges: { type: DataTypes.JSON, defaultValue: [] }, // Array of badge IDs
-  level: { type: DataTypes.ENUM('Basic', 'Easy', 'Intermediate', 'Hard', 'Veteran'), defaultValue: 'Basic' }
-});
+module.exports = (sequelize) => {
+  class User extends Model {}
 
-module.exports = User;
+  User.init({
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    hashed_password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    sequelize,
+    modelName: 'User'
+  });
+
+  return User;
+};
