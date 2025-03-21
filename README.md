@@ -7,7 +7,7 @@ Welcome to **Skill Forge**, an open-source platform where developers sharpen the
 ## 🚀 What is Skill Forge?
 Skill Forge is a gamified learning experience where you:
 - 🏆 Complete coding quests in **Python, Java, JavaScript, C#**, and more!
-- 🎯 Earn XP, level up, and unlock **achievements**.
+- 🎯 Earn XP, level up, and unlock **achievements**!
 - 💡 Solve real-world coding challenges tailored for **all skill levels**.
 - 👨‍💻 Contribute to open-source and improve your **problem-solving skills**.
 
