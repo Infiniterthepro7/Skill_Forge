@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillForge AI Teacher</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Custom Styles -->
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    [data-theme="dark"] {
+      background-color: #1a202c;
+      color: #f7fafc;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 dark:text-white min-h-screen flex flex-col items-center justify-center transition-colors duration-300">
+  <!-- Dark Mode Toggle -->
+  <div class="absolute top-4 right-4">
+    <label class="flex items-center cursor-pointer">
+      <input type="checkbox" id="darkToggle" class="hidden" />
+      <div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full p-1 flex items-center">
+        <div class="w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
+      </div>
+      <span class="ml-2 text-gray-700 dark:text-gray-300">Dark Mode</span>
+    </label>
+  </div>
+
+  <!-- Title -->
+  <h1 class="text-4xl font-bold mb-6 text-blue-600 dark:text-blue-400">SkillForge AI Teacher</h1>
+
+  <!-- Form -->
+  <form id="inputForm" class="bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+    <div class="mb-4">
+      <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="userInput">
+        Enter your prompt:
+      </label>
+      <input
+        id="userInput"
+        type="text"
+        placeholder="Type something..."
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
+      />
+    </div>
+    <div class="flex items-center justify-between">
+      <button
+        id="submitBtn"
+        type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <!-- Loading Spinner -->
+  <div id="loading" class="hidden flex justify-center items-center mt-4">
+    <svg class="animate-spin h-5 w-5 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+    <span class="ml-2">Processing...</span>
+  </div>
+
+  <!-- Output -->
+  <div id="output" class="bg-white dark:bg-gray-800 p-4 rounded shadow-md w-full max-w-md mt-4">
+    <div class="flex items-center">
+      <p id="responseText" class="mr-2">AI Response will appear here...</p>
+      <button onclick="copyText()" class="bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded">Copy</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded hidden"></div>
+
+  <!-- Script -->
+  <script src="script.js" defer></script>
+</body>
+</html>
+
